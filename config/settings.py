@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "leaflet",
     'silk',
+    'drf_spectacular',
 
     # local apps
     "accounts",
@@ -199,10 +200,42 @@ LEAFLET_CONFIG = {
 
 
 # ==============================================
-# Rest framework confnign
+# Rest framework config
 # ==============================================
 REST_FRAMEWORK = {
+    # default permission
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
+
+    # drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+
+# ==============================================
+# drf-spectacular setting section
+# ==============================================
+SPECTACULAR_SETTINGS = {
+    # Basic API information
+    "TITLE": "TrainLive API",
+    "DESCRIPTION": (
+        "TrainLive is a real-time, community-based train tracking API.\n\n"
+        "The API provides information for searching trains and railway "
+        "stations, viewing train routes and schedules, and sharing live "
+        "train reports.\n\n"
+        "TrainLive combines official train information with "
+        "community-submitted reports to provide real-time journey updates."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+
+    # API documentation
+    "SERVE_PERMISSIONS": [
+        "rest_framework.permissions.AllowAny",
+    ],
+
+    # Schema behavior
+    "COMPONENT_SPLIT_REQUEST": True,
 }

@@ -22,8 +22,8 @@ class StationSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        latitude = validated_data.pop(latitude)
-        longitude = validated_data.pop(longitude)
+        latitude = validated_data.pop("latitude")
+        longitude = validated_data.pop("longitude")
         validated_data['geom'] = Point(
             longitude,
             latitude,

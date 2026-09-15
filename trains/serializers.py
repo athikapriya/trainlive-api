@@ -1,6 +1,19 @@
 from rest_framework import serializers
+from drf_spectacular.utils import extend_schema_field
 
 from .models import Train, TrainStation
+
+
+
+# ==============================================
+# StationBriefSerializer section
+# ==============================================
+class StationBriefSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField(allow_null=True)
+    name_en = serializers.CharField(allow_null=True)
+    latitude = serializers.FloatField(allow_null=True)
+    longitude = serializers.FloatField(allow_null=True)
 
 
 # ==============================================
@@ -19,6 +32,7 @@ class TrainStationSerializers(serializers.ModelSerializer):
             "scheduled_departure",
         ]
 
+    @extend_schema_field(StationBriefSerializer)
     def get_station(self, obj):
         return {
             "id": obj.station.id,

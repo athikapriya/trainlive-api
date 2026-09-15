@@ -1,7 +1,8 @@
 from rest_framework import generics, filters
+from django.db.models import Prefetch
 
 from .models import Train, TrainStation
-from .serializers import TrainSerializers, TrainStationSerializers
+from .serializers import TrainSerializers
 from .paginations import TrainPagination
 from .permissions import IsAdminOrReadOnly
 
@@ -10,7 +11,7 @@ from .permissions import IsAdminOrReadOnly
 # TrainListAPIView section
 # =========================================================
 class TrainListAPIView(generics.ListCreateAPIView):
-    queryset = Train.objects.all()
+    queryset = Train.objects.prefetch_related(Prefetch("stops", queryset=TrainStation.objects.select_related("station")))
     serializer_class = TrainSerializers
     pagination_class = TrainPagination
     

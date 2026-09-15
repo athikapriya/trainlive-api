@@ -19,6 +19,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # third party
+    path('silk/', include("silk.urls", namespace='silk')),
+
+    # local
     path("api/stations/", include("stations.urls")),
     path("api/trains/", include("trains.urls")),
 ]

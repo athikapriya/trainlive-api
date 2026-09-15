@@ -1,7 +1,7 @@
 from rest_framework import generics, filters
 
-from .models import Train
-from .serializers import TrainSerializers
+from .models import Train, TrainStation
+from .serializers import TrainSerializers, TrainStationSerializers
 from .paginations import TrainPagination
 from .permissions import IsAdminOrReadOnly
 
